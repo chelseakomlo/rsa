@@ -1,23 +1,20 @@
 
-
 def calc_modulus(p, q):
   return p*q
 
-def calc_totient(n):
-  return 3
+def calc_totient(n, counter=0):
+  if n == 1: return counter
+  
+  if is_prime(n): counter+=1
+  return calc_totient(n-1, counter)
 
-def is_prime(n, index):
-  if index == 1: return True
+# TODO start at n/2
+def is_prime(n, index=None):
+  if not index: index = n-1
 
-  print("n %s" % n)
-  print("n %s" % index)
+  if index == 1 or index == 0: return True
   if n % index == 0: return False
 
   return is_prime(n, index-1)
-
-  #for i in range(2, n):
-  #  if n % i == 0:
-  #    return False
-  #return True
 
 
