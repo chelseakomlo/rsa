@@ -25,5 +25,23 @@ class TestRSA():
     result = is_prime(4)
     assert_false(result)
 
+  def test_generate_pub_key_exponent(self):
+    # should be greater than 1 but less than totient
+    # should be coprime to the totient (share no other factors other than 1)
+    n = 7
+    expected_pub_key_exponent = [1, 2]
+
+    actual = gen_pub_key_exponent(n)
+    assert_true(actual in expected_pub_key_exponent)
+
+    m = 11
+    expected_pub_key_exponent = [1, 2, 5]
+
+    actual = gen_pub_key_exponent(m)
+    assert_true(actual in expected_pub_key_exponent)
+
+  def test_generate_priv_key_exponent(self):
+    pass
+
 
 
