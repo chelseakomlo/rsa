@@ -28,14 +28,12 @@ class TestRSA():
     actual = gen_pub_key_exponent(2, 5)
     assert_true(actual in expected_pub_key_exponent)
 
-  def generate_priv_key_exponent(self):
-    # (d * e) % φ(n) = 1
-    # the result should be (d*e) module the toitent of n should equal 1
-
-    n = 33
+  def test_generate_priv_key_exponent(self):
+    p = 3
+    q = 11
     e = 7
     expected = 3
-    actual = gen_priv_exponent(n, e)
+    actual = gen_priv_exponent(p, q, e)
 
     assert_equals(actual, expected) 
 

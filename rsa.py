@@ -23,4 +23,14 @@ def is_prime(n, index=None):
 
   return is_prime(n, index-1)
 
+def gen_priv_exponent(p, q, e):
+  n = calc_modulus(p, q)
+  totient = calc_totient(p, q)
+  d = 1
+  while not calc_mod((d*e), totient) == 1:
+    d += 1
+  return d
+
+def calc_mod(a, b):
+  return a % b
 
