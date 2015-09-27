@@ -2,13 +2,13 @@
 
 ## Why RSA? 
 
-1. Can be used for both encrypting and signing messages
+Can be used for both encrypting and signing messages
 
 ## Background
 
 ### Chinese Remainder Theorum
 
-- The theorum
+1. The theorum
 
 With the following linear system:
 
@@ -20,17 +20,15 @@ n is modular equivilant to n2 (mod z)
 
 This system is only solvable for n when n1 = n2 (mod gcd(y, z))
 
-- Garner’s formula
-
 Another way of solving the CRT:
 
 x = (((a−b)(q^−1 mod p)) mod p)·q+b
 
-- Why is the CRT useful? 
+2. Why is the CRT useful? 
 
 If you have to do a lot of computations mod n, using this is more efficient. 
 
-- In conclusion: 
+3. In conclusion: 
 
 A number x (mod n) can be represented as a pair, x (mod p), x (mod q) when n == pq.
 
@@ -81,3 +79,7 @@ The values (p, q, t, d) form the private key.
 ## Attacks on RSA
 
 todo
+
+## Sources
+
+1. https://www.cs.utexas.edu/~mitra/honors/soln.html
