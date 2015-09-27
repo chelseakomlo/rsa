@@ -4,7 +4,7 @@ from rsa import *
 
 class TestRSA():
 
-  def test_calculate_creation_modulus_n(self):
+  def test_creation_modulus_n(self):
     p = 3
     q = 11
     actual_n = calc_modulus(p, q)
