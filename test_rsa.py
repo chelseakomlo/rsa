@@ -12,41 +12,31 @@ class TestRSA():
     assert_equals(expected_n, actual_n)
 
   def test_calculate_totient(self):
-    totient = calc_totient(5)
-    assert_equals(3, totient)
-
-    totient = calc_totient(7)
-    assert_equals(4, totient)
-
-  def test_is_prime(self):
-    result = is_prime(7)
-    assert_true(result)
-
-    result = is_prime(4)
-    assert_false(result)
+    p = 3
+    q = 11
+    totient = calc_totient(p, q)
+    assert_equals(20, totient)
 
   def test_generate_pub_key_exponent(self):
-    n = 7
-    expected_pub_key_exponent = [1, 2, 3]
+    expected_pub_key_exponent = [1, 2]
 
-    actual = gen_pub_key_exponent(n)
+    actual = gen_pub_key_exponent(2, 3)
     assert_true(actual in expected_pub_key_exponent)
 
-    m = 11
-    expected_pub_key_exponent = [1, 2, 3, 5]
+    expected_pub_key_exponent = [1, 2, 3]
 
-    actual = gen_pub_key_exponent(m)
+    actual = gen_pub_key_exponent(2, 5)
     assert_true(actual in expected_pub_key_exponent)
 
   def generate_priv_key_exponent(self):
     # (d * e) % φ(n) = 1
+    # the result should be (d*e) module the toitent of n should equal 1
 
-    n = 7
-    e = 2
+    n = 33
+    e = 7
+    expected = 3
     actual = gen_priv_exponent(n, e)
-    totient = calc_totient(n)
-    priv_key_exponent_result = (actual *e) % totient
 
-    assert_equals(priv_key_exponent_result, 1) 
+    assert_equals(actual, expected) 
 
 

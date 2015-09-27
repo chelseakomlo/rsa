@@ -3,14 +3,11 @@ import random
 def calc_modulus(p, q):
   return p*q
 
-def calc_totient(n, counter=0):
-  if n == 1: return counter
-  
-  if is_prime(n): counter+=1
-  return calc_totient(n-1, counter)
+def calc_totient(p, q):
+  return (p-1)*(q-1)
 
-def gen_pub_key_exponent(n):
-  totient = calc_totient(n)
+def gen_pub_key_exponent(p, q):
+  totient = calc_totient(p, q)
   rand_index = random.randrange(1, totient)
 
   while not is_prime(rand_index):
