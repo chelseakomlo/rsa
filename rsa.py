@@ -1,5 +1,12 @@
 import random
 
+def generate_keys(p, q):
+  n = calc_modulus(p, q)
+  e = gen_pub_key_exponent(p, q)
+  d = gen_priv_key_exponent(p, q, e)
+
+  return {"public": [e, n], "private": [d, n]}
+
 def calc_modulus(p, q):
   return p*q
 
@@ -23,7 +30,7 @@ def is_prime(n, index=None):
 
   return is_prime(n, index-1)
 
-def gen_priv_exponent(p, q, e):
+def gen_priv_key_exponent(p, q, e):
   n = calc_modulus(p, q)
   totient = calc_totient(p, q)
   d = 1
