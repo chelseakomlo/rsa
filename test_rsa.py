@@ -20,21 +20,21 @@ class TestRSA():
   def test_generate_pub_key_exponent(self):
     expected_pub_key_exponent = [1]
 
-    actual = gen_pub_key_exponent(2, 3)
+    actual = gen_pub_key_exponent(2)
     assert_true(actual in expected_pub_key_exponent)
 
     expected_pub_key_exponent = [1, 2, 3]
 
-    actual = gen_pub_key_exponent(2, 5)
+    actual = gen_pub_key_exponent(5)
     assert_true(actual in expected_pub_key_exponent)
 
   def test_generate_priv_key_exponent(self):
-    p = 3
-    q = 11
+    n = 33
+    totient = 20
     e = 7
 
     expected = 3
-    actual = gen_priv_key_exponent(p, q, e)
+    actual = gen_priv_key_exponent(n, totient, e)
     assert_equals(actual, expected) 
 
   def test_generate_keys(self):
