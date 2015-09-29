@@ -49,33 +49,37 @@ class TestRSA():
     assert_equals(actual_keys["private"], expected_private)
 
   def test_encrypt_message(self):
-    e = 3
-    n = 7
+    e = 17
+    n = 3233
 
     m = "a"
     ciphertext = encrypt(m, e, n)
-    assert_equals(6, ciphertext)
+    assert_equals(1632, ciphertext)
 
     m = "b"
     ciphertext = encrypt(m, e, n)
-    assert_equals(0, ciphertext)
+    assert_equals(2570, ciphertext)
 
     m = "ab"
     ciphertext = encrypt(m, e, n)
-    assert_equals(60, ciphertext)
+    assert_equals(281, ciphertext)
 
   def test_crypt(self):
     m = 9
-    e = 7
-    n = 143
+    e = 17
+    n = 3233
 
     ciphertext = crypt(m, e, n)
-    assert_equals(48, ciphertext)
+    assert_equals(1972, ciphertext)
 
-  def test_to_ascii(self):
-    actual = to_ascii("h")
-    assert_equals(104, actual)
+  def test_decrypt(self):
+    d = 2753
+    n = 3233
 
-    actual = to_ascii("i")
-    assert_equals(105, actual)
+    ciphertext = 1632
+    message = decrypt(ciphertext, d, n)
+    assert_equals("a", message)
 
+    ciphertext = 971161169799107
+    message = decrypt(ciphertext, d, n)
+    assert_equals("attack", message)
