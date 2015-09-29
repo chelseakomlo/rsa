@@ -37,3 +37,17 @@ def is_prime(n, index=None):
   if n % index == 0: return False
 
   return is_prime(n, index-1)
+
+#TODO add padding scheme
+def encrypt(message, e, n):
+  ciphertext = ""
+  for c in message:
+    a_c = to_ascii(c)
+    ciphertext += str(crypt(a_c, e, n))
+  return int(ciphertext)
+
+def crypt(m, e, n):
+  return ((m**e) % n)
+
+def to_ascii(c):
+  return ord(c)
