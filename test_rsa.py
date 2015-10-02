@@ -54,15 +54,16 @@ class TestRSA():
 
     m = "a"
     ciphertext = encrypt(m, e, n)
-    assert_equals(1632, ciphertext)
+    assert_equals(1632, ciphertext[0])
 
     m = "b"
     ciphertext = encrypt(m, e, n)
-    assert_equals(2570, ciphertext)
+    assert_equals(2570, ciphertext[0])
 
     m = "ab"
     ciphertext = encrypt(m, e, n)
-    assert_equals(281, ciphertext)
+    assert_equals(1632, ciphertext[0])
+    assert_equals(2570, ciphertext[1])
 
   def test_crypt(self):
     m = 9
@@ -76,10 +77,15 @@ class TestRSA():
     d = 2753
     n = 3233
 
-    ciphertext = 1632
+    ciphertext = [1632]
     message = decrypt(ciphertext, d, n)
     assert_equals("a", message)
 
-    ciphertext = 971161169799107
+    ciphertext = [1632, 2570]
     message = decrypt(ciphertext, d, n)
-    assert_equals("attack", message)
+    assert_equals("ab", message)
+
+  def test_block_padding(self):
+    #TODO
+    pass
+    pass
