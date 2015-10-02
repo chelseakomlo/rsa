@@ -8,7 +8,7 @@ Can be used for both encrypting and signing messages
 
 ### Chinese Remainder Theorum
 
-With the following linear system:
+#### With the following linear system:
 
 n is modular equivilant to to n1 (mod y)
 
@@ -18,11 +18,11 @@ n is modular equivilant to n2 (mod z)
 
 This system is only solvable for n when n1 = n2 (mod gcd(y, z))
 
-- Why is the CRT useful? 
+#### Why is the CRT useful? 
 
 If you have to do a lot of computations mod n, using this is more efficient. 
 
-- In conclusion: 
+#### In conclusion: 
 
 A number x (mod n) can be represented as a pair, x (mod p), x (mod q) when n == pq.
 
@@ -50,7 +50,7 @@ Also, this doesn't hold when x^t=0
 
 ### Encrypting Messages
 
-- Encryption
+#### Encryption
 
 ciphertext = message ^ e (mod n)
 
@@ -60,7 +60,7 @@ However, this is expensive and almost never done. Instead, we do this:
 2. Encrypt k using the RSA secret key
 3. Encrypt m with k using a block or stream cipher
 
-- Decryption 
+#### Decryption 
 
 message = ciphertext ^ d (mod n)
 
@@ -74,6 +74,3 @@ The values (p, q, t, d) form the private key.
 
 todo
 
-## Sources
-
-1. https://www.cs.utexas.edu/~mitra/honors/soln.html
