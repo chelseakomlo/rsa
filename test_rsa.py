@@ -48,22 +48,20 @@ class TestRSA():
     assert_equals(actual_keys["public"], expected_public)
     assert_equals(actual_keys["private"], expected_private)
 
-  def test_encrypt_message(self):
+  def x_test_encrypt_message(self):
     e = 17
     n = 3233
 
     m = "a"
     ciphertext = encrypt(m, e, n)
-    assert_equals(1632, ciphertext[0])
+    assert_equals(1632, ciphertext)
 
     m = "b"
     ciphertext = encrypt(m, e, n)
-    assert_equals(2570, ciphertext[0])
+    assert_equals(2570, ciphertext)
 
     m = "ab"
-    ciphertext = encrypt(m, e, n)
-    assert_equals(1632, ciphertext[0])
-    assert_equals(2570, ciphertext[1])
+    #TODO
 
   def test_crypt(self):
     m = 9
@@ -85,6 +83,17 @@ class TestRSA():
     message = decrypt(ciphertext, d, n)
     assert_equals("ab", message)
 
-  def test_block_padding(self):
+  def test_to_ascii(self):
+    message_one = "a"
+    assert_equals(97, to_ascii(message_one))
+
+    message_two = "ab"
+    assert_equals(24930, to_ascii(message_two))
+
+  def block_padding(self):
+    #TODO
+    pass
+
+  def signature(self):
     #TODO
     pass
