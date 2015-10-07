@@ -48,20 +48,17 @@ class TestRSA():
     assert_equals(actual_keys["public"], expected_public)
     assert_equals(actual_keys["private"], expected_private)
 
-  def x_test_encrypt_message(self):
+  def test_encrypt_message(self):
     e = 17
     n = 3233
 
     m = "a"
     ciphertext = encrypt(m, e, n)
-    assert_equals(1632, ciphertext)
+    assert_equals([1632], ciphertext)
 
-    m = "b"
+    m = "aa"
     ciphertext = encrypt(m, e, n)
-    assert_equals(2570, ciphertext)
-
-    m = "ab"
-    #TODO
+    assert_equals([1632, 1632], ciphertext)
 
   def test_crypt(self):
     m = 9
@@ -79,20 +76,25 @@ class TestRSA():
     message = decrypt(ciphertext, d, n)
     assert_equals("a", message)
 
-    ciphertext = [1632, 2570]
-    message = decrypt(ciphertext, d, n)
-    assert_equals("ab", message)
+    ciphertext_2 = [1632, 1632]
+    message = decrypt(ciphertext_2, d, n)
+    assert_equals("aa", message)
 
   def test_to_ascii(self):
     message_one = "a"
     assert_equals(97, to_ascii(message_one))
 
-    message_two = "ab"
-    assert_equals(24930, to_ascii(message_two))
+  def test_from_ascii(self):
+    assert_equals("a", from_ascii(97))
 
-  def block_padding(self):
-    #TODO
-    pass
+  def sanity_test_integration(self):
+    e = 17
+    d = 2753
+    n = 3233
+
+    ciphertext = encrypt("very secret", e, n)
+    message = decrypt(ciphertext, d, n)
+    assert_equals(message, "very secret")
 
   def signature(self):
     #TODO
