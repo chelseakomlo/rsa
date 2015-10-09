@@ -45,12 +45,10 @@ def encrypt(message, e, n):
     ciphertext.append(crypt(m, e, n))
   return ciphertext
 
-def decrypt(ciphertext, d, n):
-  message = ""
-  for block in ciphertext:
-    m = dcrypt(block, d, n)
-    message += from_ascii(m)
-  return message
+def decrypt(ciphertext, length, d, n):
+  m = dcrypt(ciphertext, d, n)
+  message = from_ascii(m, length)
+  return "".join(message)
 
 def dcrypt(ciphertext, d, n):
     return ((ciphertext ** d) % n)
@@ -58,8 +56,17 @@ def dcrypt(ciphertext, d, n):
 def crypt(m, e, n):
   return ((m**e) % n)
 
-def to_ascii(message):
-  return ord(message)
+def to_ascii(letters, value=0):
+  if len(letters) == 0: return value
+  counter = len(letters)-1
+  value = value | ord(letters[0]) << (8 * counter) 
+  return to_ascii(letters[1:], value) 
 
-def from_ascii(c):
-  return chr(c)
+# Assuming the length here has to be known beforehand
+# Reverse the order letters are added
+def from_ascii(value, length):
+  letters = []
+  for i in range(length):
+    letter = (value >> (i * 8) & 0xFF)
+    letters.append(chr(letter))
+  return letters
