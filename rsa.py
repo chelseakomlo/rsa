@@ -39,14 +39,12 @@ def is_prime(n, index=None):
   return is_prime(n, index-1)
 
 def encrypt(message, e, n):
-  ciphertext = []
-  for letter in list(message):
-    m = to_ascii(letter)
-    ciphertext.append(crypt(m, e, n))
-  return ciphertext
+  m = to_ascii(list(message))
+  return crypt(m, e, n)
 
 def decrypt(ciphertext, length, d, n):
   m = dcrypt(ciphertext, d, n)
+  print("ascii %s" % m)
   message = from_ascii(m, length)
   return "".join(message)
 
