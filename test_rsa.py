@@ -76,9 +76,9 @@ class TestRSA():
     message = decrypt(ciphertext, 1, d, n)
     assert_equals("a", message)
 
-    ciphertext_2 = 2894
+    ciphertext_2 = 2069
     message = decrypt(ciphertext_2, 2, d, n)
-    assert_equals("aa", message)
+    assert_equals("ab", message)
 
   def test_to_ascii(self):
     message_one = ["a"]
@@ -91,10 +91,10 @@ class TestRSA():
     assert_equals(24930, to_ascii(message_three))
 
   def test_from_ascii(self):
-    assert_equals(["a"], from_ascii(97, 1))
-    assert_equals(["b", "a"], from_ascii(24930, 2))
+    assert_equals("a", from_ascii(97, 1))
+    assert_equals("ab", from_ascii(24930, 2))
 
-  def sanity_test_integration(self):
+  def test_sanity__integration(self):
     e = 17
     d = 2753
     n = 3233
