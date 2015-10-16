@@ -3,20 +3,13 @@ import random
 def generate_keys(p, q):
   n = calc_modulus(p, q)
   totient = calc_totient(p, q)
-  e = gen_pub_key_exponent(totient)
+  e = 17 
   d = gen_priv_key_exponent(n, totient, e)
 
   return {"modulus": n, "public": e, "private": d}
 
 def calc_modulus(p, q):
   return p*q
-
-def gen_pub_key_exponent(totient):
-  rand_index = random.randrange(1, totient)
-
-  while not is_prime(rand_index):
-    rand_index -= 1
-  return rand_index
 
 def gen_priv_key_exponent(n, totient, e):
   d = 1
@@ -29,14 +22,6 @@ def calc_mod(a, b):
 
 def calc_totient(p, q):
   return (p-1)*(q-1)
-
-def is_prime(n, index=None):
-  if not index: index = n//2
-
-  if index == 1 or index == 0: return True
-  if n % index == 0: return False
-
-  return is_prime(n, index-1)
 
 def encrypt(message, e, n):
   m = to_ascii(list(message))
