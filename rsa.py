@@ -6,7 +6,7 @@ def generate_keys(p, q):
   e = gen_pub_key_exponent(totient)
   d = gen_priv_key_exponent(n, totient, e)
 
-  return {"public": [e, n], "private": [d, n]}
+  return {"modulus": n, "public": e, "private": d}
 
 def calc_modulus(p, q):
   return p*q

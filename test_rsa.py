@@ -3,6 +3,12 @@ from nose.tools import *
 from rsa import *
 
 class TestRSA():
+  def build(self):
+    p = 53
+    # this q is too large
+    #q = 227
+    q = 61
+    return generate_keys(p, q)
 
   def test_creation_modulus_n(self):
     p = 3
@@ -41,23 +47,23 @@ class TestRSA():
     p = 2
     q = 3
 
-    expected_public = [1, 6]
-    expected_private = [1, 6]
+    expected_modulus = 6
+    expected_public = 1
+    expected_private = 1
     actual_keys = generate_keys(p, q)
 
     assert_equals(actual_keys["public"], expected_public)
     assert_equals(actual_keys["private"], expected_private)
 
-  def test_encrypt_message(self):
-    e = 17
-    n = 3233
+  def t_encrypt_message(self):
+    keys = self.build()
 
     m = "a"
-    ciphertext = encrypt(m, e, n)
+    ciphertext = encrypt(m, keys["public"], keys["modulus"])
     assert_equals(1632, ciphertext)
 
     m = "aa"
-    ciphertext = encrypt(m, e, n)
+    ciphertext = encrypt(m, keys["public"], keys["modulus"])
     assert_equals(2894, ciphertext)
 
   def test_crypt(self):
@@ -68,16 +74,15 @@ class TestRSA():
     ciphertext = crypt(m, e, n)
     assert_equals(1972, ciphertext)
 
-  def test_decrypt(self):
-    d = 2753
-    n = 3233
+  def t_decrypt(self):
+    keys = self.build()
 
     ciphertext = 1632
-    message = decrypt(ciphertext, 1, d, n)
+    message = decrypt(ciphertext, 1, keys["private"], keys["modulus"])
     assert_equals("a", message)
 
     ciphertext_2 = 2069
-    message = decrypt(ciphertext_2, 2, d, n)
+    message = decrypt(ciphertext_2, 2, keys["private"], keys["modulus"])
     assert_equals("ab", message)
 
   def test_to_ascii(self):
@@ -94,14 +99,12 @@ class TestRSA():
     assert_equals("a", from_ascii(97, 1))
     assert_equals("ab", from_ascii(24930, 2))
 
-  def test_sanity__integration(self):
-    e = 17
-    d = 2753
-    n = 3233
+  def t_sanity__integration(self):
+    keys = self.build()
 
     message = "aa"
-    ciphertext = encrypt(message, e, n)
-    received_message = decrypt(ciphertext, len(message), d, n)
+    ciphertext = encrypt(message, keys["public"], keys["modulus"])
+    received_message = decrypt(ciphertext, len(message), keys["private"], keys["modulus"])
     assert_equals(received_message, "aa")
 
   def signature(self):
