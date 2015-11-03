@@ -32,6 +32,10 @@ def decrypt(ciphertext, length, d, n):
   message = from_ascii(m, length)
   return message
 
+def verify(plaintext, ciphertext, length, pub_key, n):
+  message = decrypt(ciphertext, length, pub_key, n)
+  return message == plaintext
+
 def dcrypt(ciphertext, d, n):
     return ((ciphertext ** d) % n)
 

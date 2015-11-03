@@ -94,6 +94,21 @@ class TestRSA():
     received_message = decrypt(ciphertext, len(message), keys["private"], keys["modulus"])
     assert_equals(received_message, "aa")
 
-  def signature(self):
-    #TODO
-    pass
+  def test_sign_message(self):
+	keys = self.build()
+
+	message = "aa"
+	ciphertext = encrypt(message, keys["private"], keys["modulus"])
+	received_message = decrypt(ciphertext, len(message), keys["public"], keys["modulus"])
+	assert_equals(received_message, "aa")
+
+  def test_verify_signature(self):
+	keys = self.build()
+
+	message = "aa"
+	ciphertext = encrypt(message, keys["private"], keys["modulus"])
+	verified = verify(message, ciphertext, len(message), keys["public"], keys["modulus"])
+	assert_equals(verified, True)
+	
+	verified = verify(message, ciphertext, len(message), 34890, 5)
+	assert_equals(verified, False)
